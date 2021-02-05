@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<model name="client" zh-CN="客户资料">
+    <dataSource name="client" tableName="t_model_client">
+        <columns>
+            <column name="FRowID" isPrimaryKey="True" defaultValue="{GUID}"/>
+            <column name="FNumber" zh-CN="客户编码" isNotNull="True" isUnique="True"/>
+            <column name="FName" zh-CN="客户名称"/>
+        </columns>
+    </dataSource>
+</model>
