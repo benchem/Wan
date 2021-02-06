@@ -19,9 +19,9 @@
             </columns>
         </storeSource>
         <storeSource name="demoBillHead" tableName="t_model_demobill" aliasName="t1" whereBase="t1.FIsDelete=0" orderBy="t1.FCreateTime desc">
-            <joinModel>
+            <join>
                 <item relation="left join" dataSource="client" aliasName="mClient" condition="t1.FClientID=mClient.FRowID"/>
-            </joinModel>
+            </join>
             <columns>
                 <column name="FRowID" rawName="t1.FRowID" dataType="System.String" dbType="varchar" length="255" zh-CN="主键" isPrimaryKey="True" defaultValue="{GUID}"/>
                 <column name="FIsDelete" dataType="System.Boolean" dbType="int" defaultValue="0"/>
@@ -41,11 +41,9 @@
             </childSources>
         </storeSource>
         <viewSource name="demoBillListView" tableName="t_model_demobillentry" aliasName="t1" whereBase="t1.FIsDelete=0 AND t2.FIsDelete=0" orderBy="t2.FCreateTime desc">
-            <joinModel>
-                <item relation="inner join" dataSource="demoBillHead" aliasName="t2" condition="t1.FBillID=t2.FRowID"/>
-            </joinModel>
             <join>
-                <item relation="left join" tableName="t_model_client" aliasName="mClient" condition="t2.FClientID=mClient.FRowID"/>
+                <item relation="inner join" dataSource="demoBillHead" aliasName="sDemoBillHead" condition="t1.FBillID=sDemoBillHead.FRowID"/>            
+                <item relation="left join" tableName="t_model_client" aliasName="mClient" condition="sDemoBillHead.FClientID=mClient.FRowID"/>
             </join>
             <columns>
                 <column name="FRowID" rawName="t1.FRowID"/>
